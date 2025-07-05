@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
 
 // MongoDB Connection
-const mongoURI = process.env.MONGO_URI || 'mongodb+srv://rentxuser:rentx1234@cluster0.3iwof95.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0';
+const mongoURI = process.env.MONGO_URI || 'mongodb+srv://rentxuser:rentx1234@cluster0.3iwof95.mongodb.net/newdatabase?retryWrites=true&w=majority&appName=Cluster0';
 console.log('MongoDB URI:', mongoURI);
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
