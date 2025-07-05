@@ -14,7 +14,7 @@ app.use(cors({
   origin: allowedOrigins,
   credentials: true,
 }));
-app.options('*', cors()); // Handle preflight for all routes
+app.options('/{*any}', cors()); // Handle preflight for all routes
 
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
