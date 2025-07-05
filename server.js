@@ -51,3 +51,11 @@ app.use('/api/rentals', require('./routes/rentals'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/payments', require('./routes/payments'));
 
+// v5 catch-all routes
+app.get('/*splat', async (req, res) => {
+  res.send('ok');
+});
+app.get('/{*splat}', async (req, res) => {
+  res.send('ok');
+});
+
