@@ -8,7 +8,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = ['https://rentx-frontend-ten.vercel.app' || 'https://rentx-phi.vercel.app/'];
+const allowedOrigins = ['https://rentx-git-master-nikhil-sahus-projects-0bc03434.vercel.app/' || 'https://rentx-phi.vercel.app/'];
 
 app.use(cors({
   origin: allowedOrigins,
