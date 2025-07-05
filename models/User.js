@@ -20,9 +20,9 @@ const userSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
+    required: true
+    // unique: true, // Removed unique constraint to allow duplicate phone numbers
+    // lowercase: true, // Not needed for phone numbers
   },
   googleId: {
     type: String,

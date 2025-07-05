@@ -13,23 +13,25 @@ console.log('[auth.js] JWT_SECRET =', process.env.JWT_SECRET);
 
 
 router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
+  if (!name || !email || !password || !confirmPassword) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+  if (password !== confirmPassword) {
+    return res.status(400).json({ message: 'Password and confirm password do not match' });
+  }
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: 'Email already in use' });
-
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
     const newUser = new User({
       name,
       email,
       password: hashedPassword,
     });
-
     await newUser.save();
-
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
     console.error(err);
@@ -41,24 +43,26 @@ router.post('/register', async (req, res) => {
 router.post('/signup', async (req, res) => {
   console.log('POST /api/auth/signup hit', req.body);
   console.log('BODY RECEIVED:', req.body);
-  const { name, email, password, phone } = req.body;
+  const { name, email, password, confirmPassword, phone } = req.body;
+  if (!name || !email || !password || !confirmPassword || !phone) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+  if (password !== confirmPassword) {
+    return res.status(400).json({ message: 'Password and confirm password do not match' });
+  }
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: 'Email already in use' });
-
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
     const newUser = new User({
       name,
       email,
       phone,
       password: hashedPassword,
     });
-
     await newUser.save();
-
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
     console.error(err);
