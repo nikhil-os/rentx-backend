@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const allowedOrigins = ['https://rentx-git-master-nikhil-sahus-projects-0bc03434.vercel.app/' || 'https://rentx-phi.vercel.app/'];
+const allowedOrigins = ['https://rentx-git-master-nikhil-sahus-projects-0bc03434.vercel.app' || 'https://rentx-phi.vercel.app'];
 
 app.options('/{*any}', cors()); // Handle preflight for all routes
 
