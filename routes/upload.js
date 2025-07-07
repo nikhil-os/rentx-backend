@@ -30,8 +30,12 @@ router.post('/', upload.single('file'), (req, res) => {
     return res.status(400).json({ error: 'File upload failed' });
   }
 
-  // 🎯 Return the Cloudinary secure URL
-  res.json({ url: req.file.path });
+   // 🌐 Prefer secure_url if available
+  const imageUrl = req.file.secure_url || req.file.path;
+
+  res.json({ url: imageUrl });
+  console.log('Uploaded file:', req.file);
+
 });
 
 module.exports = router;
