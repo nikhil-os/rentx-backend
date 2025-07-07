@@ -1,28 +1,31 @@
 // routes/upload.js
-const express = require('express');
-const multer = require('multer');
-const path = require('path');
+const express = require("express");
+const multer = require("multer");
 const router = express.Router();
 
-// Set up multer for file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
+const cloudinary = require("../config/cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
+// Cloudinary storage setup
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "rentx", // Optional: Cloudinary folder name
+    allowed_formats: ["jpg", "png", "jpeg"],
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  }
 });
+
 const upload = multer({ storage });
 
 // POST /api/upload
-router.post('/', upload.single('file'), (req, res) => {
+router.post("/", upload.single("file"), (req, res) => {
   if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
+    return res.status(400).json({ error: "No file uploaded" });
   }
-  // Return the file path or URL
+
+  // Cloudinary returns a secure URL
   res.json({
-    url: `/uploads/${req.file.filename}`
+    url: req.file.path,
   });
 });
 
