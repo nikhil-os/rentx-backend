@@ -15,17 +15,7 @@ const allowedOrigins = [
 ];
 
 // ✅ CORS setup with origin check
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin like mobile apps or curl
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-}));
+app.use(cors());
 
 // ✅ Handle preflight requests properly
 app.options('*', cors());
@@ -62,7 +52,7 @@ app.get('/', (req, res) => {
 });
 
 // Optional: catch-all fallback route
-app.all('/{*any}', (req, res) => {
+app.all('/{*any}', (req, res, next) => {
   res.send('OK');
 });
 
