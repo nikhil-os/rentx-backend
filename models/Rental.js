@@ -10,7 +10,9 @@ const RentalSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  image: String, // We'll handle image upload later
+  image: String,
+  image2: String,
+  image3: String, // We'll handle image upload later
   location: String,
   category: {
     type: String,

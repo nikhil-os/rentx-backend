@@ -32,6 +32,8 @@ router.post('/', auth, async (req, res) => {
       description,
       price,
       image,
+      image2,
+      image3,
       location,
       category,
       user: req.userId,
