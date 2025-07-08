@@ -25,7 +25,7 @@ const upload = multer({ storage });
 
 // 🔒 Create a rental (Protected)
 router.post('/', auth, async (req, res) => {
-  const { title, description, price, image, location, category } = req.body;
+  const { title, description, price, image, image2, image3, location, category } = req.body;
   try {
     const newRental = new Rental({
       title,
