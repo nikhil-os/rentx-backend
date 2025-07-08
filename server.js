@@ -62,7 +62,7 @@ app.get('/', (req, res) => {
 });
 
 // Optional: catch-all fallback route
-app.all('*', (req, res) => {
+app.all('/{*any}', (req, res) => {
   res.send('OK');
 });
 
