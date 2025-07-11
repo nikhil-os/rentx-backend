@@ -6,6 +6,7 @@ const auth = require('../middleware/auth');
 // POST /api/bookings - Create a booking
 router.post('/', auth, async (req, res) => {
   console.log('✅ Received user ID:', req.userId); // Add this line
+  console.log('📥 Booking request body:', req.body); // ✅ Log data coming in
   try {
     const { name, phone, email, altPhone, address, deliveryMethod, preferredTime, specialRequests, pickupDate, returnDate, rentalId } = req.body;
 
@@ -29,6 +30,7 @@ router.post('/', auth, async (req, res) => {
     });
 
     await booking.save();
+    console.log('✅ Booking saved:', booking); // ✅ Log saved booking
     res.status(201).json(booking);
   } catch (err) {
     console.error("Booking Save Error:", err);
