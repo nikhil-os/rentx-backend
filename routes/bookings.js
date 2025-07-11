@@ -5,6 +5,7 @@ const auth = require('../middleware/auth');
 
 // POST /api/bookings - Create a booking
 router.post('/', auth, async (req, res) => {
+  console.log('✅ Received user ID:', req.userId); // Add this line
   try {
     const { name, phone, email, altPhone, address, deliveryMethod, preferredTime, specialRequests, pickupDate, returnDate, rentalId } = req.body;
 
